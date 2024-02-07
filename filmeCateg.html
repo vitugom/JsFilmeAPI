@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./ASSETS/CSS/style.css">
+    <title>MOVIE LOG</title>
+</head>
+<body>
+    <header class="cabecalho">
+        <div class="cabecalho__titulo-botao">
+            <span class="cabecalho__menu-botao" data-expandir-menu><i class="fa-solid fa-bars menu__botao"></i></span>
+            <h1 class="cabecalho__titulo"><a href="index.html">MovieLOG</a></h1>
+        </div>
+        <div class="cabecalho__pesquisar">
+
+            <input type="search" placeholder="Pesquisar filme" id="pesquisar" class="pesquisar__input">
+            <button class="pesquisar__botao"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <div class="pesquisar__container-resultado">
+                <div class="pesquisar__resultado-card">
+                    <!-- conteudo inserido pelo JS-->
+                </div>
+            </div>
+        </div>
+        <div class="input-toggle-dark">
+            <input type="checkbox" id="darkModeToggle">
+            <label for="darkModeToggle" class="switch">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </header>
+    <aside class="menu">
+        <div class="menu__titulo-botao">
+            <span class="cabecalho__menu-botao" data-contrair-menu><i class="fa-solid fa-bars menu__botao"></i></span>
+            <h1 class="menu__titulo">MovieLOG</h1>
+        </div>
+        <div class="menu__opcoes-menu">
+            <ul class="menu__itens-container">
+                <li class="menu__itens-principais">
+                    <a href="#">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Início</span></a>
+                </li>
+                <li class="menu__itens-principais">
+                    <a href="#">
+                        <i class="fa-solid fa-list"></i>
+                        <span>Suas listas</span></a>                
+                </li>
+                <li class="menu__itens-principais">
+                    <a href="#">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Filmes curtidos</span></a>                
+                </li>
+            </ul>
+
+            <hr class="menu__barra">
+
+            <ul class="menu__itens-container">
+                <li class="menu__itens-destaques">
+                    <a href="#">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        <span>Populares</span></a>
+                </li>
+                <li class="menu__itens-destaques">
+                    <a href="#">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span>Nos cinemas</span></a>
+                </li>
+                <li class="menu__itens-destaques">
+                    <a href="#">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>Em breve</span></a>
+                </li>
+            </ul>
+
+            <hr class="menu__barra">
+
+            <span class="menu__itens-container menu__titulo-categorias">Explorar por categorias</span>
+            <ul class="menu__itens-container menu__categ-container">
+                <!--elementos da tabela criado com js -->
+            </ul>
+        </div>
+    </aside>
+
+
+    <script src="./App/sidebar.js" type="module"></script>
+    <script src="./App/barraPesquisa.js" type="module"></script>
+</body>
+</html>

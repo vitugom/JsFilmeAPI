@@ -1,0 +1,421 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+:root{
+    --cor-header-dark: #303030;
+    --cor-menu-lateral-dark: #282828;
+    --font-logo: "Ubuntu";
+    --font-principal: "Fira Sans";
+    --cor-font-dark: #FFFFFF;
+    --cor-font-card: #000000;   
+    --cor-menu-botao-hover: #484848;
+    --border-radius-card: 15px 30px 15px 30px;
+}
+
+    /* HEADER */
+.cabecalho{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+    background-color: var(--cor-header-dark);
+    padding: 0 20px 0 20px;
+}
+
+    /* titulo e botao menu */
+
+.cabecalho__titulo-botao{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--cor-font-dark);
+    font-family: var(--font-logo);
+}
+
+.cabecalho__menu-botao{
+    font-size: 25px;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.menu__botao{
+    margin: 10px;
+}
+
+.cabecalho__menu-botao:hover{
+    cursor: pointer;
+    background-color: var(--cor-menu-botao-hover);
+    transition: ease-in-out 0.2s;
+}
+
+.cabecalho__titulo{
+    font-size: 40px;
+}
+
+.cabecalho__titulo a{
+    text-decoration: none;
+    color: white;
+}
+
+    /* barra de pesquisa */
+
+.cabecalho__pesquisar{
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+}
+
+.pesquisar__input{
+    width: 600px;
+    height: 40px;
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #787878;
+    padding: 10px 20px 10px 20px;
+    font-family: var(--font-principal);
+    color: white;
+    background-color: var(--cor-header-dark);
+}
+
+.pesquisar__input:focus{
+    box-shadow: 0 0 0 0;
+    border: 1px solid #CDCDCD;
+    outline: 0;
+}
+
+.pesquisar__botao{
+    height: 40px;
+    width: 50px;
+    border-radius: 0 20px 20px 0;
+    color: white;
+    background-color: #787878;
+    box-shadow: 0 0 0 0;
+    border: 1px solid #787878;
+    outline: 0;
+}
+
+.pesquisar__botao:hover{
+    cursor: pointer;
+}
+
+.pesquisar__botao i{
+    font-size: 16px;
+}
+
+    /* div com os resultados da pesquisa */
+
+.pesquisar__container-resultado{
+    position: absolute;
+    width: 579px;
+    height: 300px;
+    top: 70px;
+    margin-left: 17px;
+    background-color: var(--cor-header-dark);
+    border-bottom:1px solid #787878 ;
+    border-right:1px solid #787878 ;
+    border-left:1px solid #787878 ;
+    z-index: 3;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: none;
+}
+
+
+.pesquisar__resultado-card{
+    padding: 20px;
+}
+
+.pesquisar__resultado-card:hover{
+    cursor: pointer;
+    background-color: #393939;
+}
+
+.pesquisar__resultado-card-info-filme{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+    color: var(--cor-font-dark);
+    font-family: var(--font-principal);
+}
+
+.pesquisar__img{
+    width: 100px;
+    border-radius: 5px;
+    border: 3px white solid;
+}
+
+.pesquisar__titulo-data-lancamento{
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    gap: 10px;
+}
+
+.pesquisar__titulo{
+    font-size: 18px;
+}
+
+.pesquisar__data-lancamento{
+    font-size: 14px;
+    font-weight: 200;
+    font-style: italic;
+}
+
+.pesquisar__resultado-card-categorias{
+    margin: 20px 0 20px 0;    
+}
+
+.pesquisar__filme-categ{
+    font-family: var(--font-principal);
+    color: var(--cor-font-dark);
+    background-color: var(--cor-header-dark);
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid var(--cor-font-dark);
+    margin-right: 5px;
+}
+
+    /* input para trocar modo de visualizacao da pagina */
+
+.input-toggle-dark input{
+    display: none;
+}
+
+.switch {
+    position: relative;
+    background-color: #777;
+    background-image: url('../IMG/moon-solid.svg') ;
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+    background-size: 25px;
+    width: 6cap;
+    height: 30px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .slider {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  #darkModeToggle:checked ~ .switch{
+    background-image: url('../IMG/sun-solid.svg');
+    background-position: center left 10px;
+    background-size: 25px;
+    background-color: white;
+  }
+
+  #darkModeToggle:checked ~ .switch .slider{
+    transform: translateX(35px);
+    background-color: black;
+  }
+
+    /* Menu Lateral */
+    /* logo e botao menu */
+.menu{
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    background-color: var(--cor-menu-lateral-dark);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-principal);
+    color: var(--cor-font-dark);
+    transition: all 0.2s;
+    z-index: 10;
+}
+
+.menu__titulo-botao{
+    font-family: var(--font-logo);
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    height: 100px;
+    padding-left: 20px;
+}
+
+.menu__botao{
+    font-size: 25px;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+
+.menu__botao:hover{
+    cursor: pointer;
+    background-color: var(--cor-menu-botao-hover);
+    transition: ease-in-out 0.2s;
+}
+
+/* itens do menu */
+.menu__opcoes-menu{
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.menu__opcoes-menu:hover{
+    overflow-y: auto;
+}
+
+ul li a{
+    text-decoration: none;
+    color: var(--cor-font-dark);
+}
+
+.menu__itens-container{
+    padding-left: 40px;
+}
+
+.menu__barra{
+    box-sizing: border-box;
+    margin: 10px;
+}
+
+.menu__itens-principais,.menu__itens-destaques{
+    font-size: 24px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 15px;
+}
+
+.menu__itens-principais:hover, .menu__itens-destaques:hover,.menu__itens-categoria:hover{
+    background-color: #888;
+}
+
+.menu__titulo-categorias{
+    font-size: 23px;
+}
+
+.menu__itens-categoria{
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 20px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.menu__itens-categoria i{
+    font-size: 5px;
+}
+
+.menu__categ-container{
+    margin-bottom: 120px;
+}
+
+    /* configuracoes da scroll bar */
+
+::-webkit-scrollbar {
+  width: 10px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 6px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--cor-menu-lateral-dark)
+}
+
+/* conteudo principal */
+
+.titulo-popular{
+    font-family: var(--font-logo);
+    text-align: center;
+    font-weight: 600;
+    font-size: 36px;
+    margin-top: 20px;
+    color: var(--cor-font-card);
+}
+
+.carrousel{
+    margin: 20px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 200px 200px 200px 200px 200px;
+    gap: 20px;
+    
+
+}
+
+.carrousel__card{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 200px;
+    height: 300px;
+    font-family: var(--font-principal);
+    color: var(--cor-font-dark);
+    text-align: center;
+    overflow: hidden;
+}
+
+.card__imagem-filme{
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    position: absolute;
+    border-radius: var(--border-radius-card) ;
+}
+
+
+.card__titulo-filme{
+    font-size: 18px;
+    padding: 10px;
+}
+
+.card__conteudo{
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    z-index: 1;
+    transition: all 0.3s;
+    border-radius: var(--border-radius-card) ;
+    opacity: 0;
+}
+
+.card__conteudo:hover, .carrousel__card:hover,.card__imagem-filme:hover + .card__conteudo {
+    opacity: 1;
+}
+
+.carrousel__card-opcoes{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-left: 10px;
+    gap: 15px;
+}
+
+.carrousel__card-opcoes a{
+    color: white;
+    text-decoration: none;
+}
+
+.carrousel__card-btn-ver-mais{
+    background-color: var(--cor-header-dark);
+    border: 1px solid white;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    padding: 5px 15px;
+}
+
+
+
+

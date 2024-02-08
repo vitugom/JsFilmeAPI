@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+:root{
+    --cor-header-dark: #303030;
+    --cor-menu-lateral-dark: #282828;
+    --font-logo: "Ubuntu";
+    --font-principal: "Fira Sans";
+    --cor-font-dark: #FFFFFF;
+    --cor-font-card: #000000;   
+    --cor-menu-botao-hover: #484848;
+    --border-radius-card: 15px 30px 15px 30px;
+}
+
+main{
+    font-family: var(--font-principal);
+    overflow: hidden;
+}
+
+.infoFilme__poster-img{
+    width: 290px;
+    height: 390px;
+    border: 3px solid black;
+}
+
+.infoFilme__container{
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0 0 0 80%;
+    border: 2px solid black;
+}
+
+.infoFilmes__conteudo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    gap: 10%;
+    background-color: rgba(138, 138, 138, 0.8);
+    border-radius: 0 0 0 80%;
+    
+}
+
+.infos-pricipal-filme{
+    background-color: rgba(255, 255, 255, 0.217);
+    padding: 20px;
+    max-width:700px;
+    border-radius: 30px;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+#filme-titulo{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+#filme-tagline{
+    font-size: 36px;
+    font-weight: 400;
+    font-style: italic;
+    margin: 5px 0 50px 0;
+}
+
+.infoFilme__container-botoes{
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+    border-radius: 10px;
+}
+
+.infoFilme__botoes{
+    border: 2px solid white;
+    width: 70px;
+    height: 60px;
+    border-radius: 100%;
+    color: white;
+    background-color: var(--cor-header-dark);
+    font-size: 23px;
+}
+
+.infoFilme__botoes:hover,#assister-trailer-botao:hover{
+    cursor: pointer;
+    background-color: var(--cor-menu-botao-hover);
+}
+
+#assister-trailer-botao{
+    color: white;
+    background-color: var(--cor-header-dark);
+    border: 2px solid white;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-left: 20%;
+}
+
+.infoFilme__data-genero-duracao{
+    display: inline-flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 400;
+    gap: 10px;
+    padding: 10px;
+   
+}
+
+.infoFilme__data-genero-duracao i{
+    font-size: 10px;
+}
+
+.Sinopse__container{
+    padding: 20px 10% 40px 10%;
+    color: var(--cor-font-card);
+}
+
+.Sinopse__container h1{
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+    
+}
+
+.Sinopse__container p{
+    font-size: 32px;
+    font-weight: 300;
+    
+}
+
+#titulo_card_elenco{
+    font-size: 36px;
+    font-weight: bold;
+    padding: 10px 10% 0 10%;
+    background-color: #F2F2F2;
+}
+
+.elenco__container{
+    background-color: #F2F2F2;
+    padding: 20px 10% 20px 10%;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+
+
+.elenco__card{
+    display: inline-block;
+    border: 1px black solid;
+    background-color: white;
+    margin-right: 20px;
+    white-space: normal;
+    width: 230px;
+    height: 350px;
+}
+
+.elenco__card img{
+   width: 230px;
+   height: 250px;
+}
+
+.elenco__card-info-ator{
+    padding: 10px
+}
+
+.elenco__card-info-ator h5{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    white-space: normal;
+}
+
+.elenco__card-info-ator p{
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.informacoes-adicionais{
+    margin: 20px 10% 20px 10%;
+}
+
+.titulo-informacoes-adicionais{
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.informacoes-adicionais-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
+}
+
+.info-filme-card{
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.info-filme-card-titulo{
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+
+.info-filme-card-p{
+    font-size: 20;
+    font-weight: 300;
+}
+
+
+#graficoLucro{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    display: block;
+    bottom: 30px;
+}
+
+.porcentagem-lucro{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: 300;
+}
+
+.porcentagem-lucro i{
+    padding-top: 5px;
+    padding-right: 10px;
+    font-size: 16px;
+    color: green;
+}
+
+.filmes-recomendados{
+    background-color: #484848;
+}
+
+
+.filmes-recomendados h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    padding-top: 20px;
+    color: white;
+}
+
+.filmes-recomendados__card-container{
+    padding: 50px 10% 50px 10%;
+    white-space: nowrap;
+    overflow-x: auto;
+   
+}
+
+.filmes-recomendados__card{
+    display: inline-block;
+    background-color: black;
+    border-radius: 20px;
+    margin-right: 30px;
+    overflow: hidden;
+    width: 220px;
+}
+
+.filmes-recomendados__card-imagem{
+    width: 220px;
+    height: 300px;
+    border-radius: 20px 20px 0 90px;
+}
+
+.filmes-recomendados__card-titulo{
+    font-size: 15px;
+    color: white;
+    padding: 15px;
+
+}

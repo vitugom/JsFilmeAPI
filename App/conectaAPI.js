@@ -36,7 +36,7 @@ async function buscarFilmePorGenero(id){
 }
 
 async function mostrarFilmePorId(id){
-    const conexao = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=pt-BR&append_to_response=videos,credits,similar,images&include_image_language=en,null`)
+    const conexao = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=pt-BR&append_to_response=videos,credits,recommendations,images&include_image_language=en,null`)
     const conexaoConvertida = await conexao.json()
     return conexaoConvertida
 }

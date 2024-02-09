@@ -47,12 +47,22 @@ function constroiSinopseFilme(sinopse){
   return sinopseFilme
 }
 
-function constroiCardAtores(imagemUrl, nomeAtor, nomePersonagem){
+function constroiCardAtores(imagemUrl, nomeAtor, nomePersonagem, idGenero){
+
+  let imagemUrlCompleta = `https://image.tmdb.org/t/p/original/${imagemUrl}`
+
+  if(imagemUrl == null && idGenero == 2 || imagemUrl == null && idGenero ==0){
+    imagemUrlCompleta = './ASSETS/IMG/icone-ator-masc-placeholder.png'
+  } else if(imagemUrl == null && idGenero == 1){
+    imagemUrlCompleta = './ASSETS/IMG/icone-ator-fem-placeholder.png'
+  }
+
+
   const cardAtor = document.createElement('div')
   cardAtor.className = 'elenco__card'
   cardAtor.innerHTML = 
   `
-    <img src="https://image.tmdb.org/t/p/original/${imagemUrl}" alt="">
+    <img src="${imagemUrlCompleta}" alt="">
     <div class="elenco__card-info-ator">
         <h5>${nomeAtor}</h5>
         <p>${nomePersonagem}</p>
@@ -68,7 +78,7 @@ function constroiCardInfoAdicional(tituloOriginal, situacao, idiomaOriginal, orc
   
   let porcentagem = ``
 
-  let displayGrafico = 'block'
+  let display = 'block'
 
 
 
@@ -76,10 +86,9 @@ function constroiCardInfoAdicional(tituloOriginal, situacao, idiomaOriginal, orc
 
     porcentagem = `<p id="porcentagem" class="porcentagem-lucro"><i style='color: green; font-size:20px; padding-right:5px' class="fa-solid fa-caret-up"></i>${calculoDeLucro.porcentagem}%</p>`
     
-  }else if(calculoDeLucro.lucro == NaN || calculoDeLucro.lucro == ''){
+  }else if(calculoDeLucro.lucro == NaN || calculoDeLucro.lucro == '' || calculoDeLucro.porcentagem == Infinity || receitaGerada == 0 || orcamento == 0){
 
-    porcentagem = ``
-    displayGrafico = 'none'
+    display = 'none'
     
   } else{
     porcentagem = `<p id="porcentagem" class="porcentagem-lucro"><i style='color: red; font-size:20px; padding-right:5px' class="fa-solid fa-caret-down"></i>${calculoDeLucro.porcentagem}%</p>`
@@ -113,14 +122,14 @@ function constroiCardInfoAdicional(tituloOriginal, situacao, idiomaOriginal, orc
       <h3 class="info-filme-card-titulo">Receita</h3>
       <p class="info-filme-card-p">${util.formatarNumeroComVirgulas(receitaGerada)}</p>
   </div>
-  <div>
+  <div style='display: ${display}'>
       <h3 class="info-filme-card-titulo">Lucro</h3>
       <p class="info-filme-card-p">${util.formatarNumeroComVirgulas(calculoDeLucro.lucro)}</p>
       ${porcentagem}
   </div>                
 </div>
 <div>
-  <canvas style='display: ${displayGrafico}' id="graficoLucro" width="200"></canvas>
+  <canvas style='display: ${display}' id="graficoLucro" width="200"></canvas>
 </div>
   `
   
@@ -157,18 +166,17 @@ async function listarDadosDoFilme(){
 
     let stringDeGeneros = nomeGeneros.join(", ")
     const listaDeAtores = listaApi.credits.cast;
-    const listaDeRecomendacoes = listaApi.similar.results
-    console.log(listaDeRecomendacoes)
-
+    const listaDeRecomendacoes = listaApi.recommendations.results
+    
     containerInfoFilme.appendChild(constroiInfoFilme(listaApi.poster_path, listaApi.backdrop_path, listaApi.title, listaApi.tagline, listaApi.release_date, stringDeGeneros, listaApi.runtime))
 
     containerSinopse.appendChild(constroiSinopseFilme(listaApi.overview))
 
-    listaDeAtores.forEach(ator => elencoCardContainer.appendChild(constroiCardAtores(ator.profile_path, ator.name, ator.character)))
+    listaDeAtores.forEach(ator => elencoCardContainer.appendChild(constroiCardAtores(ator.profile_path, ator.name, ator.character, ator.gender)))
 
     containerInfoAdicional.appendChild(constroiCardInfoAdicional(listaApi.original_title, listaApi.status, listaApi.original_language, listaApi.budget, listaApi.revenue))
     
-    // configuracoes do grafico e icone da porcentagem
+    // configuracoes do grafico
     let calculoDeLucro = util.calcularLucro(listaApi.budget, listaApi.revenue)
 
     const data = {

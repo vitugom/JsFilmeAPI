@@ -66,32 +66,6 @@ function constroiCardInfoAdicional(tituloOriginal, situacao, idiomaOriginal, orc
   
   let calculoDeLucro = util.calcularLucro(orcamento, receitaGerada)
 
-  const data = {
-    labels: ['Receita', 'Custos', 'Lucro'],
-    datasets: [{
-      label: 'Dados do Filme',
-      data: [receitaGerada, orcamento, calculoDeLucro.lucro],
-      backgroundColor: [
-        'rgba(255, 99, 132, 1)', 
-        'rgba(54, 162, 235, 1)',  
-        'rgba(255, 206, 86, 1)'   
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)'
-      ],
-      borderWidth:1
-    }]
-  };
-  const config = {
-    type: 'doughnut',
-    data: data,
-  };
-  const graficoLucro = new Chart(
-    document.getElementById('graficoLucro'),
-    config
-  );
 
   const infoAdicional = document.createElement('div')
   infoAdicional.className = 'informacoes-adicionais-container'
@@ -148,21 +122,58 @@ function criarFilmesRecomendados(imagemUrl, titulo){
 async function listarDadosDoFilme(){
   try{
     const listaApi = await conectaAPI.mostrarFilmePorId(idFilme)
+
     let nomeGeneros = listaApi.genres.map((genero) =>{
       return genero.name
     })
+
     let stringDeGeneros = nomeGeneros.join(", ")
     const listaDeAtores = listaApi.credits.cast;
     const listaDeRecomendacoes = listaApi.similar.results
     console.log(listaDeRecomendacoes)
 
     containerInfoFilme.appendChild(constroiInfoFilme(listaApi.poster_path, listaApi.backdrop_path, listaApi.title, listaApi.tagline, listaApi.release_date, stringDeGeneros, listaApi.runtime))
+
     containerSinopse.appendChild(constroiSinopseFilme(listaApi.overview))
+
     listaDeAtores.forEach(ator => elencoCardContainer.appendChild(constroiCardAtores(ator.profile_path, ator.name, ator.character)))
+
     containerInfoAdicional.appendChild(constroiCardInfoAdicional(listaApi.original_title, listaApi.status, listaApi.original_language, listaApi.budget, listaApi.revenue))
+    
+    // configuracoes do grafico
+    let calculoDeLucro = util.calcularLucro(listaApi.budget, listaApi.revenue)
+
+    const data = {
+      labels: ['Receita', 'Custos', 'Lucro'],
+      datasets: [{
+        label: 'Dados do Filme',
+        data: [listaApi.revenue, listaApi.budget, calculoDeLucro.lucro],
+        backgroundColor: [
+          'rgba(255, 99, 132, 1)', 
+          'rgba(54, 162, 235, 1)',  
+          'rgba(255, 206, 86, 1)'   
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)'
+        ],
+        borderWidth:1
+      }]
+    };
+    const config = {
+      type: 'doughnut',
+      data: data,
+    };
+    const graficoLucro = new Chart(
+      document.getElementById('graficoLucro'),
+      config
+    );
+//---------------------------------------------------
+
     listaDeRecomendacoes.forEach(filme => containerFilmesRecomendados.appendChild(criarFilmesRecomendados(filme.poster_path, filme.title)))
   }catch{
-
+    
   }
 }
 

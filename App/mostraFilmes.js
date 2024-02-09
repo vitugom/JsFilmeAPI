@@ -9,7 +9,6 @@ function constroiCardFilme(urlImagem, titulo, id){
         <img class="card__imagem-filme" src="https://image.tmdb.org/t/p/original/${urlImagem}" alt="">
         <div class="card__conteudo">
             <h3 class="card__titulo-filme">${titulo}</h3>
-            <span>120min - 2023</span>
             <div class="carrousel__card-opcoes">
                 <a href="paginaFilme.html?id=${id}" class="carrousel__card-btn-ver-mais">Ver mais</a>
                 <a href=""><i class="fa-solid fa-heart"></i></a>

@@ -19,12 +19,30 @@ function converterMinutosParaHoras(minutos){
 
 function calcularLucro(orcamento, receita){
     let lucro = receita - orcamento
-    let porcentagemLucro = (lucro / orcamento) * 100
+    let porcentagemLucro = ((lucro / orcamento) * 100).toFixed(2)
+    porcentagemLucro - parseFloat(porcentagemLucro).toString()
     return {
         lucro: lucro,
         porcentagem: porcentagemLucro
     }
 }
+
+function formatarNumeroComVirgulas(numero){
+    let stringNumero = numero.toString()
+
+    let partes = stringNumero.split('.')
+    let parteInteira = partes[0]
+    let parteDecimal = partes.lenght > 1 ? '.' + partes[1] : ''
+
+    parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+    if(numero == 0 || numero =="" || numero == NaN){
+        return "-"
+    }
+    return '$' + parteInteira + parteDecimal;
+}
+
+
 
 
 
@@ -32,5 +50,6 @@ function calcularLucro(orcamento, receita){
 export const util = {
     converteDataApiParaFormatoBrasileiro,
     converterMinutosParaHoras,
-    calcularLucro
+    calcularLucro,
+    formatarNumeroComVirgulas
 }

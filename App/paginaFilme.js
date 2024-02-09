@@ -65,6 +65,25 @@ function constroiCardAtores(imagemUrl, nomeAtor, nomePersonagem){
 function constroiCardInfoAdicional(tituloOriginal, situacao, idiomaOriginal, orcamento, receitaGerada){
   
   let calculoDeLucro = util.calcularLucro(orcamento, receitaGerada)
+  
+  let porcentagem = ``
+
+  let displayGrafico = 'block'
+
+
+
+  if(calculoDeLucro.lucro > 0){
+
+    porcentagem = `<p id="porcentagem" class="porcentagem-lucro"><i style='color: green; font-size:20px; padding-right:5px' class="fa-solid fa-caret-up"></i>${calculoDeLucro.porcentagem}%</p>`
+    
+  }else if(calculoDeLucro.lucro == NaN || calculoDeLucro.lucro == ''){
+
+    porcentagem = ``
+    displayGrafico = 'none'
+    
+  } else{
+    porcentagem = `<p id="porcentagem" class="porcentagem-lucro"><i style='color: red; font-size:20px; padding-right:5px' class="fa-solid fa-caret-down"></i>${calculoDeLucro.porcentagem}%</p>`
+  }
 
 
   const infoAdicional = document.createElement('div')
@@ -88,33 +107,42 @@ function constroiCardInfoAdicional(tituloOriginal, situacao, idiomaOriginal, orc
 <div class="info-filme-card">
   <div>
       <h3 class="info-filme-card-titulo">Orçamento</h3>
-      <p class="info-filme-card-p">${orcamento}</p>
+      <p class="info-filme-card-p">${util.formatarNumeroComVirgulas(orcamento)}</p>
   </div>
   <div>
       <h3 class="info-filme-card-titulo">Receita</h3>
-      <p class="info-filme-card-p">${receitaGerada}</p>
+      <p class="info-filme-card-p">${util.formatarNumeroComVirgulas(receitaGerada)}</p>
   </div>
   <div>
       <h3 class="info-filme-card-titulo">Lucro</h3>
-      <p class="info-filme-card-p">${calculoDeLucro.lucro}</p>
-      <p class="porcentagem-lucro"><i class="fa-solid fa-caret-up"></i>${calculoDeLucro.porcentagem}%</p>
+      <p class="info-filme-card-p">${util.formatarNumeroComVirgulas(calculoDeLucro.lucro)}</p>
+      ${porcentagem}
   </div>                
 </div>
 <div>
-  <canvas id="graficoLucro" width="200"></canvas>
+  <canvas style='display: ${displayGrafico}' id="graficoLucro" width="200"></canvas>
 </div>
   `
+  
+
+
+
   return infoAdicional
 }
 
-function criarFilmesRecomendados(imagemUrl, titulo){
+function criarFilmesRecomendados(imagemUrl, titulo, id){
   const filmesRecomendados = document.createElement('div')
   filmesRecomendados.className = 'filmes-recomendados__card'
   filmesRecomendados.innerHTML = 
-  `
+  `  
       <img class="filmes-recomendados__card-imagem" src="https://image.tmdb.org/t/p/original/${imagemUrl}" alt="">             
       <p class="filmes-recomendados__card-titulo">${titulo}</p>
   `
+  filmesRecomendados.addEventListener('click', () =>{
+    window.location.href = `paginaFilme.html?id=${id}`
+})
+
+
   return filmesRecomendados
 
 }
@@ -140,7 +168,7 @@ async function listarDadosDoFilme(){
 
     containerInfoAdicional.appendChild(constroiCardInfoAdicional(listaApi.original_title, listaApi.status, listaApi.original_language, listaApi.budget, listaApi.revenue))
     
-    // configuracoes do grafico
+    // configuracoes do grafico e icone da porcentagem
     let calculoDeLucro = util.calcularLucro(listaApi.budget, listaApi.revenue)
 
     const data = {
@@ -165,13 +193,13 @@ async function listarDadosDoFilme(){
       type: 'doughnut',
       data: data,
     };
-    const graficoLucro = new Chart(
+  const graficoLucro = new Chart(
       document.getElementById('graficoLucro'),
       config
     );
 //---------------------------------------------------
 
-    listaDeRecomendacoes.forEach(filme => containerFilmesRecomendados.appendChild(criarFilmesRecomendados(filme.poster_path, filme.title)))
+    listaDeRecomendacoes.forEach(filme => containerFilmesRecomendados.appendChild(criarFilmesRecomendados(filme.poster_path, filme.title, filme.id)))
   }catch{
     
   }

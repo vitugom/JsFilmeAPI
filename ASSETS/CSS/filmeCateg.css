@@ -1,0 +1,37 @@
+:root{
+    --cor-header-dark: #303030;
+    --cor-menu-lateral-dark: #282828;
+    --font-logo: "Ubuntu";
+    --font-principal: "Fira Sans";
+    --cor-font-dark: #FFFFFF;
+    --cor-font-card: #000000;   
+    --cor-menu-botao-hover: #484848;
+    --border-radius-card: 15px 30px 15px 30px;
+}
+
+.container-botao{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.botao-carregar-mais{
+    padding: 20px;
+    width: 50%;
+    background-color: var(--cor-header-dark);
+    color: white;
+    font-size: 35px;
+    border-radius: 10px;
+}
+
+.botao-carregar-mais i{
+    padding: 5px;
+    font-size: 30px;
+}
+
+.botao-carregar-mais:hover{
+    background-color: var(--cor-menu-botao-hover);
+    cursor: pointer;
+}

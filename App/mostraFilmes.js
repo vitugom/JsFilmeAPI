@@ -19,6 +19,7 @@ function constroiCardFilme(urlImagem, titulo, id){
     return filme;
 }
 
+
 async function listarFilmes(){
     try{
         const listaApi = await conectaAPI.mostraFilmesPopulares();
@@ -29,3 +30,4 @@ async function listarFilmes(){
 }
 
 listarFilmes()
+

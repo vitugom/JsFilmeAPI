@@ -79,16 +79,13 @@ function constroiCardInfoAdicional(tituloOriginal, situacao, idiomaOriginal, orc
   let porcentagem = ``
 
   let display = 'block'
-
-
-
-  if(calculoDeLucro.lucro > 0){
-
-    porcentagem = `<p id="porcentagem" class="porcentagem-lucro"><i style='color: green; font-size:20px; padding-right:5px' class="fa-solid fa-caret-up"></i>${calculoDeLucro.porcentagem}%</p>`
-    
-  }else if(calculoDeLucro.lucro == NaN || calculoDeLucro.lucro == '' || calculoDeLucro.porcentagem == Infinity || receitaGerada == 0 || orcamento == 0){
+  
+  if(calculoDeLucro.lucro == NaN || calculoDeLucro.lucro == '' || calculoDeLucro.porcentagem == Infinity || receitaGerada == 0 || receitaGerada == null || orcamento == 0 || orcamento == null){
 
     display = 'none'
+    
+  }else if(calculoDeLucro.lucro > 0){
+    porcentagem = `<p id="porcentagem" class="porcentagem-lucro"><i style='color: green; font-size:20px; padding-right:5px' class="fa-solid fa-caret-up"></i>${calculoDeLucro.porcentagem}%</p>`
     
   } else{
     porcentagem = `<p id="porcentagem" class="porcentagem-lucro"><i style='color: red; font-size:20px; padding-right:5px' class="fa-solid fa-caret-down"></i>${calculoDeLucro.porcentagem}%</p>`

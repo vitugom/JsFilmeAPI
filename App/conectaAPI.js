@@ -29,8 +29,10 @@ function encontrarNomeGeneroPorId(id){
     return genero ? genero.name : null
 }
 
-async function buscarFilmePorGenero(id){
-    const conexao = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&api_key=${apiKey}&sort_by=popularity.desc&with_genres=37`)
+
+
+async function buscarFilmePorGenero(pagina,id){
+    const conexao = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=${pagina}&api_key=${apiKey}&sort_by=popularity.desc&with_genres=${id}`)
     const conexaoConvertida = await conexao.json()
     return conexaoConvertida
 }

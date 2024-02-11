@@ -26,7 +26,7 @@ function constroiInfoFilme(id, imagemPoster, imagemFundo, titulo, tagline, data,
         <h2 id="filme-tagline">${tagline}</h2>
         <div class="infoFilme__container-botoes">
             <button id='add-fav-button' class="infoFilme__botoes"><i class="fa-solid fa-heart"></i></button>
-            <button id='add-assistir-mais-tarde-button' class="infoFilme__botoes"><i class="fa-solid fa-clock"></i></button>
+            <button id='add-assistir-mais-tarde-button' class="infoFilme__botoes"><i class="fa-solid fa-circle-plus"></i></button>
             <button id="assister-trailer-botao">Assista o trailer <i class="fa-solid fa-play"></i></button>
         </div>
         <p class="infoFilme__data-genero-duracao">${util.converteDataApiParaFormatoBrasileiro(data)} <i class="fa-solid fa-circle"></i> ${genero} <i class="fa-solid fa-circle"></i> ${util.converterMinutosParaHoras(tempoDeFilme)}</p>
@@ -175,7 +175,7 @@ function atualizaCorBotoes(){
 
 async function listarDadosDoFilme(){
   try{
-    const listaApi = await conectaAPI.mostrarFilmePorId(idFilme)
+    const listaApi = await conectaAPI.mostrarFilmeElencoRecomendacaoPorId(idFilme)
 
     let nomeGeneros = listaApi.genres.map((genero) =>{
       return genero.name

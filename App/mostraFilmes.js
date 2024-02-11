@@ -23,7 +23,7 @@ async function listarFilmes(){
     try{
         const listaApi = await conectaAPI.mostraFilmesPopulares();
         listaApi.forEach(elemento => containerFilmesPopulares.appendChild(constroiCardFilme(elemento.poster_path, elemento.title, elemento.id)))
-
+        
     } catch {
         containerFilmesPopulares.innerHTML = `<h2>Não foi possível carregar a lista de filmes</h2>`
     }

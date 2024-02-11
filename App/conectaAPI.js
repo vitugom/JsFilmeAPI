@@ -37,8 +37,14 @@ async function buscarFilmePorGenero(pagina,id){
     return conexaoConvertida
 }
 
-async function mostrarFilmePorId(id){
+async function mostrarFilmeElencoRecomendacaoPorId(id){
     const conexao = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=pt-BR&append_to_response=videos,credits,recommendations,images&include_image_language=en,null`)
+    const conexaoConvertida = await conexao.json()
+    return conexaoConvertida
+}
+
+async function mostrarFilmePorId(id){
+    const conexao = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=pt-BR`)
     const conexaoConvertida = await conexao.json()
     return conexaoConvertida
 }
@@ -51,5 +57,6 @@ export const conectaAPI = {
     buscarListaDeGenero,
     encontrarNomeGeneroPorId,
     buscarFilmePorGenero,
+    mostrarFilmeElencoRecomendacaoPorId,
     mostrarFilmePorId
 }

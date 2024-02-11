@@ -1,5 +1,6 @@
 import { conectaAPI } from "./conectaAPI.js";
 import { util } from "./util.js";
+import { addFilmesListas } from "./adicionarFilmesLista.js";
 
 const parametro = new URLSearchParams(window.location.search)
 const idFilme = parametro.get('id')
@@ -10,8 +11,7 @@ const elencoCardContainer = document.querySelector('.elenco__card-container')
 const containerInfoAdicional = document.querySelector('.informacoes-adicionais')
 const containerFilmesRecomendados = document.querySelector('.filmes-recomendados__card-container')
 
-
-function constroiInfoFilme(imagemPoster, imagemFundo, titulo, tagline, data, genero, tempoDeFilme){
+function constroiInfoFilme(id, imagemPoster, imagemFundo, titulo, tagline, data, genero, tempoDeFilme){
 
   let background = document.querySelector('.infoFilme__container')
   background.style.backgroundImage = "url('https://image.tmdb.org/t/p/original/" + imagemFundo + "')"
@@ -25,9 +25,8 @@ function constroiInfoFilme(imagemPoster, imagemFundo, titulo, tagline, data, gen
         <h1 id="filme-titulo">${titulo}</h1>
         <h2 id="filme-tagline">${tagline}</h2>
         <div class="infoFilme__container-botoes">
-            <button class="infoFilme__botoes"><i class="fa-solid fa-heart"></i></button>
-            <button class="infoFilme__botoes"><i class="fa-solid fa-bookmark"></i></button>
-            <button class="infoFilme__botoes"><i class="fa-solid fa-list"></i></button>
+            <button id='add-fav-button' class="infoFilme__botoes"><i class="fa-solid fa-heart"></i></button>
+            <button id='add-assistir-mais-tarde-button' class="infoFilme__botoes"><i class="fa-solid fa-clock"></i></button>
             <button id="assister-trailer-botao">Assista o trailer <i class="fa-solid fa-play"></i></button>
         </div>
         <p class="infoFilme__data-genero-duracao">${util.converteDataApiParaFormatoBrasileiro(data)} <i class="fa-solid fa-circle"></i> ${genero} <i class="fa-solid fa-circle"></i> ${util.converterMinutosParaHoras(tempoDeFilme)}</p>
@@ -153,6 +152,27 @@ function criarFilmesRecomendados(imagemUrl, titulo, id){
 
 }
 
+function atualizaCorBotoes(){
+  let listaFilmesFavoritos = JSON.parse(localStorage.getItem("filmesFavoritos")) || [];
+  let listaAssistirMaisTarde = JSON.parse(localStorage.getItem("AssistirMaisTarde")) || [];
+
+  const botaoAddFav = document.getElementById('add-fav-button')
+  const botaoAssistirMaisTarde = document.getElementById('add-assistir-mais-tarde-button')
+
+  if(listaFilmesFavoritos.includes(idFilme)){
+    botaoAddFav.style.color = "red"
+  } else {
+    botaoAddFav.style.color = "white"
+  }
+
+  if(listaAssistirMaisTarde.includes(idFilme)){
+    botaoAssistirMaisTarde.style.color = "yellow"
+  } else {
+    botaoAssistirMaisTarde.style.color = "white"
+  }
+
+}
+
 async function listarDadosDoFilme(){
   try{
     const listaApi = await conectaAPI.mostrarFilmePorId(idFilme)
@@ -165,7 +185,7 @@ async function listarDadosDoFilme(){
     const listaDeAtores = listaApi.credits.cast;
     const listaDeRecomendacoes = listaApi.recommendations.results
     
-    containerInfoFilme.appendChild(constroiInfoFilme(listaApi.poster_path, listaApi.backdrop_path, listaApi.title, listaApi.tagline, listaApi.release_date, stringDeGeneros, listaApi.runtime))
+    containerInfoFilme.appendChild(constroiInfoFilme(listaApi.id ,listaApi.poster_path, listaApi.backdrop_path, listaApi.title, listaApi.tagline, listaApi.release_date, stringDeGeneros, listaApi.runtime))
 
     containerSinopse.appendChild(constroiSinopseFilme(listaApi.overview))
 
@@ -198,19 +218,40 @@ async function listarDadosDoFilme(){
       type: 'doughnut',
       data: data,
     };
-  const graficoLucro = new Chart(
+    const graficoLucro = new Chart(
       document.getElementById('graficoLucro'),
       config
     );
-//---------------------------------------------------
-
+    //---------------------------------------------------
+    
     listaDeRecomendacoes.forEach(filme => containerFilmesRecomendados.appendChild(criarFilmesRecomendados(filme.poster_path, filme.title, filme.id)))
+
+    const botaoAddFav = document.getElementById('add-fav-button')
+    const botaoAssistirMaisTarde = document.getElementById('add-assistir-mais-tarde-button')
+    
+    botaoAddFav.addEventListener('click', () => {
+      addFilmesListas.adicionarAosFavoritos(idFilme)
+      atualizaCorBotoes()
+    })
+
+    botaoAssistirMaisTarde.addEventListener('click', () => {
+      addFilmesListas.adicionarAssistirMaisTarde(idFilme)
+      atualizaCorBotoes()
+    })
+
+
+
+    window.onload = atualizaCorBotoes()
+
   }catch{
     
   }
 }
 
 listarDadosDoFilme()
+
+
+
 
 
 

@@ -173,6 +173,15 @@ function atualizaCorBotoes(){
 
 }
 
+function popUpTrailerFilme(videoKey){
+  const containerTrailer = document.querySelector('.container-trailer')
+  containerTrailer.innerHTML = `<iframe class="iframe-trailer" width="560" height="315" src="https://www.youtube.com/embed/${videoKey}?si=2xCcgB6SZ9qJLKnX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen></iframe>`
+  containerTrailer.style.display = 'flex'
+
+}
+
+
+
 async function listarDadosDoFilme(){
   try{
     const listaApi = await conectaAPI.mostrarFilmeElencoRecomendacaoPorId(idFilme)
@@ -239,6 +248,22 @@ async function listarDadosDoFilme(){
       atualizaCorBotoes()
     })
 
+    const botaoAssistirTrailer = document.getElementById('assister-trailer-botao')
+    
+    let trailerFilmes = listaApi.videos.results
+    
+    const resultadosFiltrados = trailerFilmes.filter(resultado =>{
+      const nomeMinusculo = resultado.name.toLowerCase();
+      return !nomeMinusculo.includes("acessibilidade") && resultado.site === "YouTube" && resultado.type === "Trailer";
+    })
+    
+    if(resultadosFiltrados.length === 0){
+      botaoAssistirTrailer.style.display = 'none'
+    }
+
+    botaoAssistirTrailer.addEventListener('click', () => {
+      popUpTrailerFilme(resultadosFiltrados[0].key)
+    })
 
 
     window.onload = atualizaCorBotoes()
@@ -251,8 +276,17 @@ async function listarDadosDoFilme(){
 listarDadosDoFilme()
 
 
+document.addEventListener('click', (event) =>{
+  let elementoClicado = event.target
+  const containerTrailer = document.querySelector('.container-trailer')
+  const iframeTrailer = document.querySelector('.iframe-trailer')
+  const botaoAssistirTrailer = document.getElementById('assister-trailer-botao')
 
-
+  if(elementoClicado !== botaoAssistirTrailer && !iframeTrailer.contains(elementoClicado)){ 
+    iframeTrailer.remove()
+    containerTrailer.style.display = 'none' 
+  }
+})
 
 
 

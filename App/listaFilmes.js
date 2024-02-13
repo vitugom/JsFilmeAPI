@@ -63,7 +63,7 @@ const botaoFavoritos = document.getElementById('botao-filmes-curtidos')
 const botaoLista = document.getElementById('botao-filmes-lista')
 
 botaoFavoritos.addEventListener('click', ()=>{
-    botaoFavoritos.style.backgroundColor = 'grey'
+    botaoFavoritos.style.backgroundColor = 'rgb(89, 89, 89)'
     botaoLista.style.backgroundColor = ''
     containerListaFilmes.innerHTML = ''
     mostrarFilmesFavoritados()
@@ -71,14 +71,33 @@ botaoFavoritos.addEventListener('click', ()=>{
 
 botaoLista.addEventListener('click', ()=>{
     botaoFavoritos.style.backgroundColor = ''
-    botaoLista.style.backgroundColor = 'grey'
+    botaoLista.style.backgroundColor = 'rgb(89, 89, 89)'
     containerListaFilmes.innerHTML = ''
     mostrarFilmesNaLista()
 })
 
 function pageLoad(){
     mostrarFilmesFavoritados()
-    botaoFavoritos.style.backgroundColor = 'grey'
+    botaoFavoritos.style.backgroundColor = 'rgb(89, 89, 89)'
+    if(window.innerWidth <= 588){
+        botaoFavoritos.innerHTML = '<i class="fa-solid fa-heart">'
+        botaoLista.innerHTML = '<i class="fa-solid fa-list"></i>'
+    }else{
+        botaoLista.innerHTML = '<h3><i class="fa-solid fa-list"></i> Filmes na sua lista</h3>'
+        botaoFavoritos.innerHTML = '<h3><i class="fa-solid fa-heart"></i> Filmes curtidos</h3>'
+    }
 }
+
+
+window.addEventListener('resize', ()=> {
+    if(window.innerWidth <= 588){
+        botaoFavoritos.innerHTML = '<i class="fa-solid fa-heart">'
+        botaoLista.innerHTML = '<i class="fa-solid fa-list"></i>'
+    }else{
+        botaoLista.innerHTML = '<h3><i class="fa-solid fa-list"></i> Filmes na sua lista</h3>'
+        botaoFavoritos.innerHTML = '<h3><i class="fa-solid fa-heart"></i> Filmes curtidos</h3>'
+    }
+})
+
 
 window.onload = pageLoad()

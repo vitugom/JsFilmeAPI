@@ -12,62 +12,109 @@
 }
 
 .lista-filmes__container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 50px 50% 50px 50%;
+    margin: 50px;
 }
 
 .lista-filmes__painel-botoes{
-    background-color: var(--cor-header-dark);
-    width: 20vw;
-    height: 80vh;
-    border-radius:  5px 0 0 5px ;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-self: flex-start;
 }
 
 .painel-botoes{
+    display: inline-block;
     background-color: var(--cor-header-dark);
     color: white;
-    font-size: 25px;
-    width: 100%;
-    padding: 20px 0 20px 0;
+    padding: 10px;
     font-family: var(--font-principal);
-    text-align: center;
-    margin-top: 20px;
+    font-size: 25px;
+    border-radius: 10px 10px 0 0;
     
 }
 
 .painel-botoes:hover{
-    background-color: var(--cor-menu-botao-hover);
     cursor: pointer;
 }
 
-.lista-filmes__painel-filmes{
-    border: solid 3px var(--cor-header-dark);
-    box-sizing: border-box;
-    width: 75vw;
-    height: 80vh;
-    padding: 10px;
-    border-radius: 0 5px 5px 0;
-}
-
 .painel-filmes__container-filmes{
-    border-radius: 5px;
-    width: 100%;
-    height: 100%;
-    border: 2px dashed var(--cor-header-dark);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr  ;
+    grid-template-columns: repeat(7, 1fr);
+
+    width: 100%;
+    height: 77vh;
+    background-color: rgb(89, 89, 89);
+
+    overflow: hidden;
     overflow-y: auto;
-    overflow-x: hidden;
+
+    border-radius: 0 20px 0 20px;
 }
 
 .carrousel__card{
     padding: 20px;
     position: relative;
     
+}
+
+@media only screen and (max-width: 1782px) {
+    .painel-filmes__container-filmes{
+        grid-template-columns: repeat(6, 1fr);
+
+    }
+}
+
+@media only screen and (max-width: 1550px) {
+    .painel-filmes__container-filmes{
+        grid-template-columns: repeat(5, 1fr);
+
+    }
+}
+
+@media only screen and (max-width: 1320px) {
+    .painel-filmes__container-filmes{
+        grid-template-columns: repeat(4, 1fr);
+
+    }
+}
+
+@media only screen and (max-width: 1070px) {
+    .painel-filmes__container-filmes{
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
+
+@media only screen and (max-width: 830px) {
+    .painel-filmes__container-filmes{
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+}
+
+@media only screen and (max-width: 588px) {
+    .painel-filmes__container-filmes{
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+    .painel-botoes{
+     padding: 15px;
+        
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    .carrousel__card img{
+        width: 200px;
+        
+    }
+
+    .painel-filmes__container-filmes{
+    
+        width: 90vw;
+        height: 77vh;
+  
+   
+    }
 }

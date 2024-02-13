@@ -35,3 +35,42 @@
     background-color: var(--cor-menu-botao-hover);
     cursor: pointer;
 }
+
+
+@media only screen and (max-width: 610px) {
+
+    .botao-carregar-mais{
+        padding: 20px;
+        width: 50%;
+        background-color: var(--cor-header-dark);
+        color: white;
+        font-size: 25px;
+        border-radius: 10px;
+    }
+    .botao-carregar-mais i{
+        padding: 5px;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 610px) {
+
+    .botao-carregar-mais{
+        font-size: 20px;
+        border-radius: 10px;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+
+    
+    .botao-carregar-mais{
+        font-size: 20px;
+        width: 200px;
+    }
+
+    .botao-carregar-mais i{
+ 
+        font-size: 15px;
+    }
+}

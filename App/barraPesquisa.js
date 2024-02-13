@@ -4,6 +4,9 @@ import { util } from "./util.js";
 const barraDePesquisa = document.getElementById('pesquisar')
 const containerResultadoPesquisa = document.querySelector('.pesquisar__container-resultado')
 
+const botaoPesquisaMobile = document.getElementById('botao-pesquisa-mobile')
+const barraDePesquisaMobile = document.querySelector('.cabecalho__pesquisar')
+
 function constroiCardPesquisa(urlImagem, titulo, data, filmeGenero, id){
 
     let spanString = ''
@@ -47,9 +50,6 @@ async function listarPesquisa(){
 }
 
 
-// barraDePesquisa.addEventListener('blur', () => {
-//     containerResultadoPesquisa.style.display = 'none'
-// })
 
 barraDePesquisa.addEventListener('focus', () => {
     if(barraDePesquisa.value.trim() !== ''){
@@ -66,6 +66,16 @@ barraDePesquisa.addEventListener('input', () =>{
         containerResultadoPesquisa.style.display = 'block'
         containerResultadoPesquisa.innerHTML = ''
         listarPesquisa()
+    }
+})
+
+botaoPesquisaMobile.addEventListener("click", () =>{
+    let estiloDoDisplay = window.getComputedStyle(barraDePesquisaMobile).getPropertyValue('display')
+
+    if(estiloDoDisplay === 'none'){
+        barraDePesquisaMobile.style.display = 'block'
+    } else {
+        barraDePesquisaMobile.style.display = 'none'
     }
 })
 

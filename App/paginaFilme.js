@@ -29,7 +29,9 @@ function constroiInfoFilme(id, imagemPoster, imagemFundo, titulo, tagline, data,
             <button id='add-assistir-mais-tarde-button' class="infoFilme__botoes"><i class="fa-solid fa-circle-plus"></i></button>
             <button id="assister-trailer-botao">Assista o trailer <i class="fa-solid fa-play"></i></button>
         </div>
-        <p class="infoFilme__data-genero-duracao">${util.converteDataApiParaFormatoBrasileiro(data)} <i class="fa-solid fa-circle"></i> ${genero} <i class="fa-solid fa-circle"></i> ${util.converterMinutosParaHoras(tempoDeFilme)}</p>
+        <p class="infoFilme__data-genero-duracao">${genero}</p>
+        <br>
+        <p class="infoFilme__data-genero-duracao">${util.converteDataApiParaFormatoBrasileiro(data)}<i class="fa-solid fa-circle"></i> ${util.converterMinutosParaHoras(tempoDeFilme)}</p>
     </div>
   `
   return informacaoFilme
@@ -124,8 +126,8 @@ function constroiCardInfoAdicional(tituloOriginal, situacao, idiomaOriginal, orc
       ${porcentagem}
   </div>                
 </div>
-<div>
-  <canvas style='display: ${display}' id="graficoLucro" width="200"></canvas>
+<div class="container-grafico-lucro">
+  <canvas style='display: ${display}' id="graficoLucro"></canvas>
 </div>
   `
   
@@ -282,7 +284,7 @@ document.addEventListener('click', (event) =>{
   const iframeTrailer = document.querySelector('.iframe-trailer')
   const botaoAssistirTrailer = document.getElementById('assister-trailer-botao')
 
-  if(elementoClicado !== botaoAssistirTrailer && !iframeTrailer.contains(elementoClicado)){ 
+  if(elementoClicado !== botaoAssistirTrailer){ 
     iframeTrailer.remove()
     containerTrailer.style.display = 'none' 
   }
